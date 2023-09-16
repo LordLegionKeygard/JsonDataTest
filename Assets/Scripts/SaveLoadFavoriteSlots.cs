@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -38,12 +39,14 @@ public class SaveLoadFavoriteSlots : MonoBehaviour
         var filename = "text.json";
         var filepath = Path.Combine(dirPath, filename);
 
-        if (Directory.Exists(dirPath))
+        if (String.IsNullOrEmpty(filepath))
         {
+
             var jsonStrRead = File.ReadAllText(filepath);
             var deserializedList = JsonConvert.DeserializeObject<List<int>>(jsonStrRead);
             _favoriteSlots.FavoriteList = deserializedList;
         }
 
+        else Debug.Log("JsonFileEmpty");
     }
 }
